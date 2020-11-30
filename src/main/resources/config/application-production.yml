@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://tangoristo-dev.cxos4w515nj0.us-west-2.rds.amazonaws.com/tangoristo?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASS}
+    driverClassName: com.mysql.jdbc.Driver
+
+settings:
+  analysisQueueProcessorEnabled: true
+  analysisQueueMaxConcurrentMessages: 10
+  dictionary:
+    inMemory: false
+  aws:
+    sqs:
+      maxNumberOfMessages: 10
+      analysisRequestQueueUrl: https://sqs.us-west-2.amazonaws.com/012000500574/tangoristo-analysis-request-queue-prd
+    s3:
+      bucketName: tangoristo-prd

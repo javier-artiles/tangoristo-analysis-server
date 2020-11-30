@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <jmxConfigurator />
+
+    <logger name="org.apache.http.wire" >
+        <level value="WARN" />
+    </logger>
+
+    <!-- Elevate the log level for 'org.springframework.scheduling' since in
+     process of registering the scheduled task, Spring's
+     ScheduledAnnotationBeanPostProcessor tries to find TaskScheduler and
+     ScheduledExecutorService beans and then fallbacks to its internal
+     scheduler but in the process logs exceptions when it cannot find those
+     beans registered.
+    -->
+    <logger name="org.springframework.scheduling">
+        <level value="info" />
+    </logger>
+
+    <springProfile name="default, local, development">
+        <include resource="org/springframework/boot/logging/logback/base.xml" />
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+        <logger name="org.apache" level="INFO"/>
+        <logger name="com.optimaize.langdetect" level="INFO"/>
+        <logger name="io.searchbox" level="INFO" />
+        <logger name="twitter4j" level="INFO" />
+        <logger name="sun" level="INFO" />
+    </springProfile>
+
+    <springProfile name="production">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+</configuration>

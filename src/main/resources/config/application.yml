@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: tangoristo
+  datasource:
+    url: jdbc:h2:mem:db
+    driverClassName: org.h2.Driver
+  jpa:
+    generate-ddl: true
+
+settings:
+  analysisQueueProcessorEnabled: false
+  analysisQueueMaxConcurrentMessages: 1
+  dictionary:
+    inMemory: true
+  aws:
+    sqs:
+      maxNumberOfMessages: 1
+      analysisRequestQueueUrl: https://sqs.us-west-2.amazonaws.com/012000500574/tangoristo-analysis-request-queue-dev
+    s3:
+      bucketName: tangoristo-local
+      keyPrefix: analysis
+
+management:
+  context-path: /manage
+
+endpoints:
+  metrics:
+    sensitive: false
+
+languageDetection: ja, en
+
+dictionaries:
+  japanese:
+    jmdictPath: classpath:data/ja/jmdict.xml
+    jmdictExtPath: classpath:data/ja/jmdict_ext.xml
+    jmnedictPath: classpath:data/ja/jmnedict.xml
+    frequencyPath: classpath:data/ja/freq/wikipedia_ja_freq.lst
+    jlptPrefixPath: classpath:data/ja/jlpt/jmdict-to-jlpt-n
+    posMappingPath: classpath:data/ja/kuromoji_to_jmdict_pos.tsv
+    lookaheadLimit: 4
+

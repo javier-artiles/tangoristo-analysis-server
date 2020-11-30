@@ -1,0 +1,412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "TangoRisto backend API",
+    "version": "1.0",
+    "title": "TangoRisto"
+  },
+  "host": "tangoristo-dev.us-west-2.elasticbeanstalk.com:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "documentProvider",
+      "description": "Document Search Controller"
+    },
+    {
+      "name": "vocabularyAnalyzer",
+      "description": "Vocabulary Analyzer Controller"
+    }
+  ],
+  "paths": {
+    "/api/analyze_vocabulary_from_text": {
+      "post": {
+        "tags": [
+          "vocabularyAnalyzer"
+        ],
+        "summary": "Returns a the analyzed vocabulary on a given text",
+        "operationId": "analyzeVocabularyFromTextUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "text",
+            "description": "text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VocabularyAnalysisResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/analyze_vocabulary_from_url": {
+      "get": {
+        "tags": [
+          "vocabularyAnalyzer"
+        ],
+        "summary": "Returns a the analyzed vocabulary on a given URL's content",
+        "operationId": "analyzeVocabularyFromUrlUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "useCache",
+            "in": "query",
+            "description": "useCache",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VocabularyAnalysisResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/search_documents": {
+      "get": {
+        "tags": [
+          "documentProvider"
+        ],
+        "summary": "Returns a document search results",
+        "operationId": "searchDocumentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxNum",
+            "in": "query",
+            "description": "maxNum",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "sortField",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "order",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "name": "queryStr",
+            "in": "query",
+            "description": "queryStr",
+            "required": false,
+            "type": "string",
+            "default": "*"
+          },
+          {
+            "name": "useCache",
+            "in": "query",
+            "description": "useCache",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VocabularyEntity": {
+      "type": "object",
+      "properties": {
+        "dictionaryEntry": {
+          "$ref": "#/definitions/DictionaryEntry"
+        },
+        "firstOccurrenceOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reading": {
+          "type": "string"
+        },
+        "tokenSequenceOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenSequence"
+          }
+        }
+      }
+    },
+    "ReadingToSurfaceFormPair": {
+      "type": "object",
+      "properties": {
+        "reading": {
+          "type": "string"
+        },
+        "surfaceForm": {
+          "type": "string"
+        }
+      }
+    },
+    "DictionaryEntry": {
+      "type": "object",
+      "properties": {
+        "alternateForm": {
+          "type": "string"
+        },
+        "commonWord": {
+          "type": "boolean"
+        },
+        "definitions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "dictionaryForm": {
+          "type": "string"
+        },
+        "officialProficiencyLevel": {
+          "type": "string"
+        },
+        "partOfSpeech": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properNoun": {
+          "type": "boolean"
+        }
+      }
+    },
+    "VocabularyLevel": {
+      "type": "object",
+      "properties": {
+        "increasingDifficultyLevelLabels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "levelToFrequency": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "unknownLevelFrequency": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Token": {
+      "type": "object",
+      "properties": {
+        "alignedReadingsToForms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReadingToSurfaceFormPair"
+          }
+        },
+        "baseForm": {
+          "type": "string"
+        },
+        "baseFormReading": {
+          "type": "string"
+        },
+        "inflected": {
+          "type": "boolean"
+        },
+        "partOfSpeech": {
+          "type": "string"
+        },
+        "startOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "surfaceForm": {
+          "type": "string"
+        },
+        "surfaceReading": {
+          "type": "string"
+        }
+      }
+    },
+    "LinkedSubstring": {
+      "type": "object",
+      "properties": {
+        "readingList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sequenceIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "surfaceList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vocabularyIndex": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TokenSequence": {
+      "type": "object",
+      "properties": {
+        "baseForm": {
+          "type": "string"
+        },
+        "baseFormReading": {
+          "type": "string"
+        },
+        "firstOccurrenceOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "inflected": {
+          "type": "boolean"
+        },
+        "surfaceForm": {
+          "type": "string"
+        },
+        "surfaceReading": {
+          "type": "string"
+        },
+        "tokenList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Token"
+          }
+        }
+      }
+    },
+    "VocabularyAnalysisResult": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "linkedText": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedSubstring"
+          }
+        },
+        "sourceUrl": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "vocabulary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VocabularyEntity"
+          }
+        },
+        "vocabularyLevel": {
+          "$ref": "#/definitions/VocabularyLevel"
+        }
+      }
+    }
+  }
+}

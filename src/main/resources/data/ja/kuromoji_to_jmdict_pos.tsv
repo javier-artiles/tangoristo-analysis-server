@@ -1,0 +1,88 @@
+adj-f	形容詞
+adj-i	形容詞
+adj-ix	形容詞
+adj-ku	形容詞
+adj-na	形容詞
+adj-nari	形容詞
+adj-no	形容詞
+adj-pn	形容詞
+adj-shiku	形容詞
+adj-t	形容詞
+adv-to	副詞	助詞類接続
+adv	副詞	一般
+adv	名詞	副詞可能
+aux-adj	形容詞	非自立
+aux-v	動詞	非自立
+aux	助動詞
+conj	接続詞
+ctr	名詞	接尾	助数詞
+inter	感動詞
+n-adv	名詞
+n-pr	名詞
+n-pref	名詞
+n-suf	名詞
+n-t	名詞
+n	名詞
+num	名詞	数
+pn	名詞	代名詞
+pref	接頭詞
+prt	助詞
+suf	名詞	接尾
+v1-s	動詞
+v1	動詞
+v2a-s	動詞
+v2b-k	動詞
+v2d-s	動詞
+v2g-k	動詞
+v2g-s	動詞
+v2h-k	動詞
+v2h-s	動詞
+v2k-k	動詞
+v2k-s	動詞
+v2m-s	動詞
+v2n-s	動詞
+v2r-k	動詞
+v2r-s	動詞
+v2s-s	動詞
+v2t-k	動詞
+v2t-s	動詞
+v2w-s	動詞
+v2y-k	動詞
+v2y-s	動詞
+v2z-s	動詞
+v4b	動詞
+v4h	動詞
+v4k	動詞
+v4m	動詞
+v4r	動詞
+v4s	動詞
+v4t	動詞
+v5aru	動詞
+v5b	動詞
+v5g	動詞
+v5k-s	動詞
+v5k	動詞
+v5m	動詞
+v5n	動詞
+v5r-i	動詞
+v5r	動詞
+v5s	動詞
+v5t	動詞
+v5u-s	動詞
+v5u	動詞
+vi	動詞
+vk	動詞
+vn	動詞
+vr	動詞
+vt	動詞
+vz	動詞
+surname	名詞	固有名詞	人名	姓
+place	名詞	固有名詞	地域
+organization	名詞	固有名詞	組織
+company	名詞	固有名詞	地域
+station	名詞	固有名詞	地域
+masc	名詞	固有名詞	人名	名
+feme	名詞	固有名詞	人名	名
+person	名詞	固有名詞	人名
+given	名詞	固有名詞	人名	名
+cop-da	助動詞
